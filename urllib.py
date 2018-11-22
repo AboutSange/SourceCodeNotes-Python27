@@ -1297,7 +1297,7 @@ def quote(s, safe='/'):
         (quoter, safe) = _safe_quoters[cachekey]
     except KeyError:
         safe_map = _safe_map.copy()  # 浅拷贝
-        safe_map.update([(c, c) for c in safe])
+        safe_map.update([(c, c) for c in safe])  # key: always_safe + safe
         quoter = safe_map.__getitem__
         safe = always_safe + safe
         _safe_quoters[cachekey] = (quoter, safe)
