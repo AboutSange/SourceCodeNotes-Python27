@@ -583,6 +583,7 @@ class HTTPErrorProcessor(BaseHandler):
 
         # According to RFC 2616, "2xx" code indicates that the client's
         # request was successfully received, understood, and accepted.
+        # 注意：此处如果返回的response的code不在[200, 300)中，则urlopen()主动抛出异常，不能正常获取response内容（但实际上response是有内容的）
         if not (200 <= code < 300):
             response = self.parent.error(
                 'http', request, response, code, msg, hdrs)
